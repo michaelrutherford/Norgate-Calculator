@@ -42,8 +42,9 @@ _All input must be seperated by spaces. See the example below._
 > 6
 
 # LINKS
-* Go: https://golang.org/
-* GPL: http://www.gnu.org/licenses/gpl-3.0.html
+[Go](https://golang.org/)
+
+[GPL](http://www.gnu.org/licenses/gpl-3.0.html)
 
 # LICENSE
-Released under the GNU GPL v3.0 by Michael Rutherford (2015) -- see COPYING
+Released under the GNU GPL v3.0 by Michael Rutherford (2015) -- see LICENSE
