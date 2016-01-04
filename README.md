@@ -1,8 +1,6 @@
 # Norgate-Calculator
 A simple, cross-platform, CLI calculator written in Go.
 
-[05/15/2015]
-
 # TODO
 * Improve error handling.
 * Create a makefile.
