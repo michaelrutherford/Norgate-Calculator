@@ -40,9 +40,9 @@ _All input must be seperated by spaces. See the example below._
 > 6
 
 # LINKS
-[Go](https://golang.org/)
+[Apache](http://www.apache.org/licenses/LICENSE-2.0)
 
-[GPL](http://www.gnu.org/licenses/gpl-3.0.html)
+[Go](https://golang.org/)
 
 # LICENSE
 Released under the Apache License v2.0 by Michael Rutherford (2015) -- see LICENSE
