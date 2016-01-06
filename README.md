@@ -26,6 +26,7 @@ To run Norgate after compilation, enter the following command into the terminal:
 If you want to run Norgate without saving the compiled program, type the following command into the terminal:
 
 > go run norgate.go
+
 _All input must be seperated by spaces. See the example below._
 
 > Enter an equation.
