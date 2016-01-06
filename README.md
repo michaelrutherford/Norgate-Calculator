@@ -45,4 +45,4 @@ _All input must be seperated by spaces. See the example below._
 [GPL](http://www.gnu.org/licenses/gpl-3.0.html)
 
 # LICENSE
-Released under the GNU GPL v3.0 by Michael Rutherford (2015) -- see LICENSE
+Released under the Apache License v2.0 by Michael Rutherford (2015) -- see LICENSE
