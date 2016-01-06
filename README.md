@@ -18,6 +18,7 @@ If your GOPATH is not set, you can install Norgate Calculator using the Go build
 
 > go build -o ~/Go/bin/norgate
 
+# RUNNING
 To run Norgate after compilation, enter the following command into the terminal:
 
 > ./norgate
@@ -25,8 +26,6 @@ To run Norgate after compilation, enter the following command into the terminal:
 If you want to run Norgate without saving the compiled program, type the following command into the terminal:
 
 > go run norgate.go
-
-# RUNNING
 _All input must be seperated by spaces. See the example below._
 
 > Enter an equation.
