@@ -15,6 +15,7 @@ limitations under the License.
 */
 
 package main
+
 import (
         "fmt"
         "os"
@@ -37,7 +38,7 @@ func main () {
         in, inerr := inread.ReadString ('\n')
         if inerr != nil {
                 ecode = 6
-                error (ecode)
+                err (ecode)
         }
         input = in
         if strings.Contains (input, "history") {
@@ -63,7 +64,7 @@ func splice (a string) []string {
                 eqcoll = strings.Split (a, " ")
         } else {
                 ecode = 2
-                error (ecode)
+                err (ecode)
         }
         return eqcoll
 }
@@ -83,7 +84,10 @@ func solve (a []string) float64 {
                 if a[t] == "-" {
                         opcount++
                 }
-                if a[t] == "\x25" {
+                if a[t] == "%" {
+                        opcount++
+                }
+                if a[t] == "r" {
                         opcount++
                 }
                 if a[t] == "^" {
@@ -95,11 +99,48 @@ func solve (a []string) float64 {
         }
         opcount--
         for opcount >= 0 {
+                sqr:
+                for i := 0; i < len (a); i++ {
+                        fdist := 1
+                        if a[i] == "r" {
+                                for y := i; y < len (a); y++ {
+                                        if a[y] != "^" && a[y] != "r" && y == len (a) {
+                                                break
+                                        }
+                                }
+                                for y := i; y < len (a); y++ {
+                                        if a[i + fdist] == "." {
+                                                fdist++
+                                        }
+                                }
+                                one, err_one := strconv.ParseFloat (a[i + fdist], 64)
+                                if err_one != nil {
+                                        ecode = 6
+                                        err (ecode)
+                                }
+                                one = squareroot (one)
+                                a[i + fdist] = "."
+                                a[i] = fmt.Sprintf ("%v", one);
+                                answer = one
+                                opcount--
+                                fmt.Println (strings.Trim (fmt.Sprint(a), "[]"))
+                                i = 0
+                        }
+                }
                 exp:
                 for i := 0; i < len (a); i++ {
                         fdist := 1
 			bdist := 1
                         if a[i] == "^" {
+                                for y := i; y < len (a); y++ {
+                                        if a[y] == "r" {
+                                                i = y
+                                                goto sqr
+                                                break
+                                        } else if a[y] != "^" && a[y] != "r" && y == len (a) {
+                                                break
+                                        }
+                                }
                                 for y := i; y < len (a); y++ {
                                         if a[i + fdist] == "." {
                                                 fdist++
@@ -110,29 +151,15 @@ func solve (a []string) float64 {
                                                 bdist++
                                         }
                                 }
-                                one, err := strconv.ParseFloat (a[i - bdist], 64)
-                                if err != nil {
+                                one, err_one := strconv.ParseFloat (a[i - bdist], 64)
+                                if err_one != nil {
                                         ecode = 6
-                                        error (ecode)
+                                        err (ecode)
                                 }
-                                two, errtwo := strconv.ParseFloat (a[i + fdist], 64)
-                                if errtwo != nil {
-                                        ecode = 6
-                                        error (ecode)
-                                }
-                                two = exponent (one, two)
-                                a[i] = "."
-                                a[i + fdist] = fmt.Sprintf ("%v", two);
+                                one = factorial (one)
                                 a[i - bdist] = "."
-                                for y := len (a) - 1; y >= 0; y++ {
-                                        if a[y] != "." {
-                                                if a[i + fdist + 1] == "." {
-                                                        a[i + fdist + 1] = "^"
-                                                }
-                                                break
-                                        }
-                                }
-                                answer = two
+                                a[i] = fmt.Sprintf ("%v", one);
+                                answer = one
                                 opcount--
                                 fmt.Println (strings.Trim (fmt.Sprint(a), "[]"))
                                 i = 0
@@ -147,7 +174,7 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto exp
                                                 break
-                                        } else if a[y] != "^" && y == len (a) {
+                                        } else if a[y] != "^" && a[y] != "r" && y == len (a) {
                                                 break
                                         }
                                 }
@@ -161,10 +188,10 @@ func solve (a []string) float64 {
                                                 bdist++
                                         }
                                 }
-                                one, err := strconv.ParseFloat (a[i - bdist], 64)
-                                if err != nil {
+                                one, err_one := strconv.ParseFloat (a[i - bdist], 64)
+                                if err_one != nil {
                                         ecode = 6
-                                        error (ecode)
+                                        err (ecode)
                                 }
                                 one = factorial (one)
                                 a[i - bdist] = "."
@@ -185,7 +212,11 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto exp
                                                 break
-                                        } else if a[y] != "^" && y == len (a) {
+                                        } else if a[y] == "r" {
+                                                i = y
+                                                goto sqr
+                                                break
+                                        } else if a[y] != "^" && a[y] != "r" && y == len (a) {
                                                 break
                                         }
                                 }
@@ -199,15 +230,15 @@ func solve (a []string) float64 {
                                                 bdist++
                                         }
                                 }
-                                one, err := strconv.ParseFloat (a[i - bdist], 64)
-                                if err != nil {
+                                one, err_one := strconv.ParseFloat (a[i - bdist], 64)
+                                if err_one != nil {
                                         ecode = 6
-                                        error (ecode)
+                                        err (ecode)
                                 }
-                                two, errtwo := strconv.ParseFloat (a[i + fdist], 64)
-                                if errtwo != nil {
+                                two, err_two := strconv.ParseFloat (a[i + fdist], 64)
+                                if err_two != nil {
                                         ecode = 6
-                                        error (ecode)
+                                        err (ecode)
                                 }
                                 two = multiply (one, two)
                                 a[i] = "."
@@ -229,7 +260,11 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto exp
                                                 break
-                                        } else if a[y] != "^" && y == len (a) {
+                                        } else if a[y] == "r" {
+                                                i = y
+                                                goto sqr
+                                                break
+                                        } else if a[y] != "^" && a[y] != "r" && y == len (a) {
                                                 break
                                         }
                                 }
@@ -243,15 +278,15 @@ func solve (a []string) float64 {
                                                 bdist++
                                         }
                                 }
-                                one, err := strconv.ParseFloat (a[i - bdist], 64)
-                                if err != nil {
+                                one, err_one := strconv.ParseFloat (a[i - bdist], 64)
+                                if err_one != nil {
                                         ecode = 6
-                                        error (ecode)
+                                        err (ecode)
                                 }
-                                two, errtwo := strconv.ParseFloat (a[i + fdist], 64)
-                                if errtwo != nil {
+                                two, err_two := strconv.ParseFloat (a[i + fdist], 64)
+                                if err_two != nil {
                                         ecode = 6
-                                        error (ecode)
+                                        err (ecode)
                                 }
                                 two = divide (one, two)
                                 a[i] = "."
@@ -276,11 +311,15 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto div
                                                 break
+                                        } else if a[y] == "r" {
+                                               i = y
+                                               goto sqr
+                                               break
                                         } else if a[y] == "^" {
                                                i = y
                                                goto exp
                                                break
-                                        } else if a[y] == "\x25" {
+                                        } else if a[y] == "%" {
                                                i = y
                                                goto mod
                                                break
@@ -296,28 +335,20 @@ func solve (a []string) float64 {
                                                 bdist++
                                         }
                                 }
-                                one, err := strconv.ParseFloat (a[i - bdist], 64)
-                                if err != nil {
+                                one, err_one := strconv.ParseFloat (a[i - bdist], 64)
+                                if err_one != nil {
                                         ecode = 6
-                                        error (ecode)
+                                        err (ecode)
                                 }
-                                two, errtwo := strconv.ParseFloat (a[i + fdist], 64)
-                                if errtwo != nil {
+                                two, err_two := strconv.ParseFloat (a[i + fdist], 64)
+                                if err_two != nil {
                                         ecode = 6
-                                        error (ecode)
+                                        err (ecode)
                                 }
                                 two = add (one, two)
                                 a[i] = "."
                                 a[i + fdist] = fmt.Sprintf ("%v", two);
                                 a[i - bdist] = "."
-                                for y := len (a) - 1; y >= 0; y++ {
-                                        if a[y] != "." {
-                                                if a[i + fdist + 1] == "." && a[i + fdist + 2] != "=" {
-                                                        a[i + fdist + 1] = "+"
-                                                }
-                                                break
-                                        }
-                                }
                                 answer = two
                                 opcount--
                                 fmt.Println (strings.Trim (fmt.Sprint(a), "[]"))
@@ -337,11 +368,15 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto div
                                                 break
+                                        } else if a[y] == "r" {
+                                               i = y
+                                               goto sqr
+                                               break
                                         } else if a[y] == "^" {
                                                i = y
                                                goto exp
                                                break
-                                        } else if a[y] == "\x25" {
+                                        } else if a[y] == "%" {
                                                i = y
                                                goto mod
                                                break
@@ -357,28 +392,20 @@ func solve (a []string) float64 {
                                                 bdist++
                                         }
                                 }
-                                one, err := strconv.ParseFloat (a[i - bdist], 64)
-                                if err != nil {
+                                one, err_one := strconv.ParseFloat (a[i - bdist], 64)
+                                if err_one != nil {
                                         ecode = 6
-                                        error (ecode)
+                                        err (ecode)
                                 }
-                                two, errtwo := strconv.ParseFloat (a[i + fdist], 64)
-                                if errtwo != nil {
+                                two, err_two := strconv.ParseFloat (a[i + fdist], 64)
+                                if err_two != nil {
                                         ecode = 6
-                                        error (ecode)
+                                        err (ecode)
                                 }
                                 two = subtract (one, two)
                                 a[i] = "."
                                 a[i + fdist] = fmt.Sprintf ("%v", two);
                                 a[i - 1] = "."
-                                for y := len (a) - 1; y >= 0; y++ {
-                                        if a[y] != "." {
-                                                if a[i + fdist + 1] == "." {
-                                                        a[i + fdist + 1] = "-"
-                                                }
-                                                break
-                                        }
-                                }
                                 answer = two
                                 opcount--
                                 fmt.Println (strings.Trim (fmt.Sprint(a), "[]"))
@@ -389,11 +416,15 @@ func solve (a []string) float64 {
                 for i := 0; i < len (a); i++ {
                         fdist := 1
 			bdist := 1
-                        if a[i] == "\x25" {
+                        if a[i] == "%" {
                                 for y := i; y < len (a); y++ {
                                         if a[y] == "^" {
                                                 i = y
-                                                goto mul
+                                                goto exp
+                                                break
+                                        } else if a[y] == "r" {
+                                                i = y
+                                                goto sqr
                                                 break
                                         }
                                 }
@@ -407,28 +438,20 @@ func solve (a []string) float64 {
                                                 bdist++
                                         }
                                 }
-                                one, err := strconv.ParseFloat (a[i - bdist], 64)
-                                if err != nil {
+                                one, err_one := strconv.ParseFloat (a[i - bdist], 64)
+                                if err_one != nil {
                                         ecode = 6
-                                        error (ecode)
+                                        err (ecode)
                                 }
-                                two, errtwo := strconv.ParseFloat (a[i + fdist], 64)
-                                if errtwo != nil {
+                                two, err_two := strconv.ParseFloat (a[i + fdist], 64)
+                                if err_two != nil {
                                         ecode = 6
-                                        error (ecode)
+                                        err (ecode)
                                 }
                                 two = modulus (one, two)
                                 a[i] = "."
                                 a[i + fdist] = fmt.Sprintf ("%v", two);
                                 a[i - bdist] = "."
-                                for y := len (a) - 1; y >= 0; y++ {
-                                        if a[y] != "." {
-                                                if a[i + fdist + 1] == "." {
-                                                        a[i + fdist + 1] = "\x25"
-                                                }
-                                                break
-                                        }
-                                }
                                 answer = two
                                 opcount--
                                 fmt.Println (strings.Trim (fmt.Sprint(a), "[]"))
@@ -438,7 +461,7 @@ func solve (a []string) float64 {
         }
         return answer
 }
-func error (e int) {
+func err (e int) {
         switch (e) {
         case 1:
                 fmt.Println ("Error 1: Overflow.")
@@ -472,101 +495,101 @@ func clear () {
 func add (a, b float64) float64 {
         if a + b > MAX || a + b < MIN {
                 ecode = 3
-                error (ecode)
+                err (ecode)
         }
         return a + b
 }
 func subtract (a, b float64) float64 {
         if a - b > MAX || a - b < MIN {
                 ecode = 3
-                error (ecode)
+                err (ecode)
         }
         return a - b
 }
 func multiply (a, b float64) float64 {
         if a * b > MAX || a * b < MIN {
                 ecode = 3
-                error (ecode)
+                err (ecode)
         }
         return a * b
 }
 func divide (a, b float64) float64 {
         if b == 0 {
                 ecode = 4
-                error (ecode)
+                err (ecode)
         } else if a == 0 {
                 return 0
         }
         if a / b > MAX || a / b < MIN {
                 ecode = 3
-                error (ecode)
+                err (ecode)
         }
         return a / b
 }
 func modulus (a, b float64) float64 {
         if math.Mod (a, b) > MAX || math.Mod (a, b) < MIN {
                 ecode = 3
-                error (ecode)
+                err (ecode)
         }
         return math.Mod (a, b)
 }
 func factorial (a float64) float64 {
         if a < 0 {
                 ecode = 2
-                error (ecode)
+                err (ecode)
         }
         for track := a - 1; track > 0; track-- {
                 a = a * track
         }
         if a > MAX || a < MIN {
                 ecode = 3
-                error (ecode)
+                err (ecode)
         }
         return a
 }
 func squareroot (a float64) float64 {
         if math.Sqrt (a) > MAX || math.Sqrt (a) < MIN {
                 ecode = 3
-                error (ecode)
+                err (ecode)
         }
         if a < 0 {
                 ecode = 5
-                error (ecode)
+                err (ecode)
         }
         return math.Sqrt (a)
 }
 func sine (a float64) float64 {
         if math.Sin (a) > MAX || math.Sin (a) < MIN {
                 ecode = 3
-                error (ecode)
+                err (ecode)
         }
         return math.Sin (a)
 }
 func cosine (a float64) float64 {
         if math.Cos (a) > MAX || math.Cos (a) < MIN {
                 ecode = 3
-                error (ecode)
+                err (ecode)
         }
         return math.Cos (a)
 }
 func tangent (a float64) float64 {
         if math.Tan (a) > MAX || math.Tan (a) < MIN {
                 ecode = 3
-                error (ecode)
+                err (ecode)
         }
         return math.Tan (a)
 }
 func absolute (a float64) float64 {
         if math.Abs (a) > MAX || math.Abs (a) < MIN {
                 ecode = 3
-                error (ecode)
+                err (ecode)
         }
         return math.Abs (a)
 }
 func exponent (a, b float64) float64 {
         if math.Pow (a, b) > MAX || math.Pow (a, b) < MIN {
                 ecode = 3
-                error (ecode)
+                err (ecode)
         }
         return math.Pow (a, b)
 }
