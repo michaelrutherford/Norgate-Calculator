@@ -113,8 +113,8 @@ func solve (a []string) float64 {
                                                 fdist++
                                         }
                                 }
-                                one, err_one := strconv.ParseFloat (a[i + fdist], 64)
-                                if err_one != nil {
+                                one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
+                                if errorOne != nil {
                                         ecode = 6
                                         err (ecode)
                                 }
@@ -151,8 +151,8 @@ func solve (a []string) float64 {
                                                 bdist++
                                         }
                                 }
-                                one, err_one := strconv.ParseFloat (a[i - bdist], 64)
-                                if err_one != nil {
+                                one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
+                                if errorOne != nil {
                                         ecode = 6
                                         err (ecode)
                                 }
@@ -188,8 +188,8 @@ func solve (a []string) float64 {
                                                 bdist++
                                         }
                                 }
-                                one, err_one := strconv.ParseFloat (a[i - bdist], 64)
-                                if err_one != nil {
+                                one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
+                                if errorOne != nil {
                                         ecode = 6
                                         err (ecode)
                                 }
@@ -230,13 +230,13 @@ func solve (a []string) float64 {
                                                 bdist++
                                         }
                                 }
-                                one, err_one := strconv.ParseFloat (a[i - bdist], 64)
-                                if err_one != nil {
+                                one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
+                                if errorOne != nil {
                                         ecode = 6
                                         err (ecode)
                                 }
-                                two, err_two := strconv.ParseFloat (a[i + fdist], 64)
-                                if err_two != nil {
+                                two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
+                                if errorTwo != nil {
                                         ecode = 6
                                         err (ecode)
                                 }
@@ -278,13 +278,13 @@ func solve (a []string) float64 {
                                                 bdist++
                                         }
                                 }
-                                one, err_one := strconv.ParseFloat (a[i - bdist], 64)
-                                if err_one != nil {
+                                one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
+                                if errorOne != nil {
                                         ecode = 6
                                         err (ecode)
                                 }
-                                two, err_two := strconv.ParseFloat (a[i + fdist], 64)
-                                if err_two != nil {
+                                two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
+                                if errorTwo != nil {
                                         ecode = 6
                                         err (ecode)
                                 }
@@ -335,13 +335,13 @@ func solve (a []string) float64 {
                                                 bdist++
                                         }
                                 }
-                                one, err_one := strconv.ParseFloat (a[i - bdist], 64)
-                                if err_one != nil {
+                                one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
+                                if errorOne != nil {
                                         ecode = 6
                                         err (ecode)
                                 }
-                                two, err_two := strconv.ParseFloat (a[i + fdist], 64)
-                                if err_two != nil {
+                                two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
+                                if errorTwo != nil {
                                         ecode = 6
                                         err (ecode)
                                 }
@@ -392,13 +392,13 @@ func solve (a []string) float64 {
                                                 bdist++
                                         }
                                 }
-                                one, err_one := strconv.ParseFloat (a[i - bdist], 64)
-                                if err_one != nil {
+                                one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
+                                if errorOne != nil {
                                         ecode = 6
                                         err (ecode)
                                 }
-                                two, err_two := strconv.ParseFloat (a[i + fdist], 64)
-                                if err_two != nil {
+                                two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
+                                if errorTwo != nil {
                                         ecode = 6
                                         err (ecode)
                                 }
@@ -438,13 +438,13 @@ func solve (a []string) float64 {
                                                 bdist++
                                         }
                                 }
-                                one, err_one := strconv.ParseFloat (a[i - bdist], 64)
-                                if err_one != nil {
+                                one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
+                                if errorOne != nil {
                                         ecode = 6
                                         err (ecode)
                                 }
-                                two, err_two := strconv.ParseFloat (a[i + fdist], 64)
-                                if err_two != nil {
+                                two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
+                                if errorTwo != nil {
                                         ecode = 6
                                         err (ecode)
                                 }
