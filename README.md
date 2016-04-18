@@ -3,9 +3,7 @@ A simple, cross-platform, CLI calculator written in Go.
 
 # TODO
 * Improve error handling.
-* Create a makefile.
 * Create more functions.
-* Create applicaton icon.
 
 # COMPILING
 _Before running anything, ensure that Go is installed and your GOPATH is set._
@@ -27,7 +25,7 @@ If you want to run Norgate without saving the compiled program, type the followi
 
 > go run norgate.go
 
-_All input must be seperated by spaces. See the example below._
+_All input must be separated by spaces. See the example below._
 
 > Enter an equation.
 
