@@ -4,6 +4,8 @@ A simple, cross-platform, CLI calculator written in Go.
 # TODO
 * Improve error handling.
 * Create more functions.
+* Allow non-spaced input.
+* Store input as well as output.
 
 # COMPILING
 _Before running anything, ensure that Go is installed and your GOPATH is set._
