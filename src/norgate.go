@@ -83,6 +83,8 @@ func solve (a []string) float64 {
                         opcount++
                 case "sqrt":
                         opcount++
+                case "abs":
+                        opcount++
                 case "^":
                         opcount++
                 case "sin":
@@ -101,11 +103,6 @@ func solve (a []string) float64 {
                 for i := 0; i < len (a); i++ {
                         fdist := 1
                         if a[i] == "sqrt" {
-                                for y := i; y < len (a); y++ {
-                                        if a[y] != "^" && a[y] != "sqrt" && y == len (a) {
-                                                break
-                                        }
-                                }
                                 for y := i; y < len (a); y++ {
                                         if a[i + fdist] == "." {
                                                 fdist++
@@ -154,6 +151,29 @@ func solve (a []string) float64 {
                                 }
                                 one = factorial (one)
                                 a[i - bdist] = "."
+                                a[i] = fmt.Sprintf ("%v", one);
+                                answer = one
+                                opcount--
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                i = 0
+                        }
+                }
+                abs:
+                for i := 0; i < len (a); i++ {
+                        fdist := 1
+                        if a[i] == "abs" {
+                                for y := i; y < len (a); y++ {
+                                        if a[i + fdist] == "." {
+                                                fdist++
+                                        }
+                                }
+                                one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
+                                if errorOne != nil {
+                                        ecode = 6
+                                        err (ecode)
+                                }
+                                one = absolute (one)
+                                a[i + fdist] = "."
                                 a[i] = fmt.Sprintf ("%v", one);
                                 answer = one
                                 opcount--
@@ -239,6 +259,14 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto exp
                                                 break
+                                        } else if a[y] == "sqrt" {
+                                                i = y
+                                                goto sqrt
+                                                break
+                                        } else if a[y] == "abs" {
+                                                i = y
+                                                goto abs
+                                                break
                                         } else if a[y] == "sin" {
                                                 i = y
                                                 goto sineLabel
@@ -290,6 +318,10 @@ func solve (a []string) float64 {
                                         } else if a[y] == "sqrt" {
                                                 i = y
                                                 goto sqrt
+                                                break
+                                        } else if a[y] == "abs" {
+                                                i = y
+                                                goto abs
                                                 break
                                         } else if a[y] == "sin" {
                                                 i = y
@@ -348,6 +380,10 @@ func solve (a []string) float64 {
                                         } else if a[y] == "sqrt" {
                                                 i = y
                                                 goto sqrt
+                                                break
+                                        } else if a[y] == "abs" {
+                                                i = y
+                                                goto abs
                                                 break
                                         } else if a[y] == "sin" {
                                                 i = y
@@ -409,6 +445,10 @@ func solve (a []string) float64 {
                                         } else if a[y] == "sqrt" {
                                                 i = y
                                                 goto sqrt
+                                                break
+                                        } else if a[y] == "abs" {
+                                                i = y
+                                                goto abs
                                                 break
                                         } else if a[y] == "^" {
                                                 i = y
@@ -479,6 +519,10 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto sqrt
                                                 break
+                                        } else if a[y] == "abs" {
+                                                i = y
+                                                goto abs
+                                                break
                                         } else if a[y] == "^" {
                                                 i = y
                                                 goto exp
@@ -544,6 +588,10 @@ func solve (a []string) float64 {
                                         } else if a[y] == "sqrt" {
                                                 i = y
                                                 goto sqrt
+                                                break
+                                        } else if a[y] == "abs" {
+                                                i = y
+                                                goto abs
                                                 break
                                         } else if a[y] == "sin" {
                                                 i = y
