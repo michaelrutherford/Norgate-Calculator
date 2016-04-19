@@ -87,6 +87,8 @@ func solve (a []string) float64 {
                         opcount++
                 case "sin":
                         opcount++
+                case "cos":
+                        opcount++
                 case "!":
                         opcount++
                 }
@@ -131,8 +133,6 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto sqrt
                                                 break
-                                        } else if a[y] != "^" && a[y] != "sqrt" && y == len (a) {
-                                                break
                                         }
                                 }
                                 for y := i; y < len (a); y++ {
@@ -163,11 +163,6 @@ func solve (a []string) float64 {
                         fdist := 1
                         if a[i] == "sin" {
                                 for y := i; y < len (a); y++ {
-                                        if a[y] != "^" && a[y] != "sin" && y == len (a) {
-                                                break
-                                        }
-                                }
-                                for y := i; y < len (a); y++ {
                                         if a[i + fdist] == "." {
                                                 fdist++
                                         }
@@ -188,14 +183,34 @@ func solve (a []string) float64 {
                 }
                 for i := 0; i < len (a); i++ {
                         fdist := 1
+                        if a[i] == "cos" {
+                                for y := i; y < len (a); y++ {
+                                        if a[i + fdist] == "." {
+                                                fdist++
+                                        }
+                                }
+                                one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
+                                if errorOne != nil {
+                                        ecode = 6
+                                        err (ecode)
+                                }
+                                one = cosine (one)
+                                a[i + fdist] = "."
+                                a[i] = fmt.Sprintf ("%v", one);
+                                answer = one
+                                opcount--
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                i = 0
+                        }
+                }
+                for i := 0; i < len (a); i++ {
+                        fdist := 1
 			bdist := 1
                         if a[i] == "!" {
                                 for y := i; y < len (a); y++ {
                                         if a[y] == "^" {
                                                 i = y
                                                 goto exp
-                                                break
-                                        } else if a[y] != "^" && a[y] != "sqrt" && y == len (a) {
                                                 break
                                         }
                                 }
@@ -236,8 +251,6 @@ func solve (a []string) float64 {
                                         } else if a[y] == "sqrt" {
                                                 i = y
                                                 goto sqrt
-                                                break
-                                        } else if a[y] != "^" && a[y] != "sqrt" && y == len (a) {
                                                 break
                                         }
                                 }
@@ -284,8 +297,6 @@ func solve (a []string) float64 {
                                         } else if a[y] == "sqrt" {
                                                 i = y
                                                 goto sqrt
-                                                break
-                                        } else if a[y] != "^" && a[y] != "sqrt" && y == len (a) {
                                                 break
                                         }
                                 }
