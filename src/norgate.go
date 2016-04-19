@@ -89,6 +89,8 @@ func solve (a []string) float64 {
                         opcount++
                 case "cos":
                         opcount++
+                case "tan":
+                        opcount++
                 case "!":
                         opcount++
                 }
@@ -159,6 +161,7 @@ func solve (a []string) float64 {
                                 i = 0
                         }
                 }
+                sineLabel:
                 for i := 0; i < len (a); i++ {
                         fdist := 1
                         if a[i] == "sin" {
@@ -181,6 +184,7 @@ func solve (a []string) float64 {
                                 i = 0
                         }
                 }
+                cosineLabel:
                 for i := 0; i < len (a); i++ {
                         fdist := 1
                         if a[i] == "cos" {
@@ -203,6 +207,29 @@ func solve (a []string) float64 {
                                 i = 0
                         }
                 }
+                tangentLabel:
+                for i := 0; i < len (a); i++ {
+                        fdist := 1
+                        if a[i] == "tan" {
+                                for y := i; y < len (a); y++ {
+                                        if a[i + fdist] == "." {
+                                                fdist++
+                                        }
+                                }
+                                one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
+                                if errorOne != nil {
+                                        ecode = 6
+                                        err (ecode)
+                                }
+                                one = tangent (one)
+                                a[i + fdist] = "."
+                                a[i] = fmt.Sprintf ("%v", one);
+                                answer = one
+                                opcount--
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                i = 0
+                        }
+                }
                 for i := 0; i < len (a); i++ {
                         fdist := 1
 			bdist := 1
@@ -211,6 +238,18 @@ func solve (a []string) float64 {
                                         if a[y] == "^" {
                                                 i = y
                                                 goto exp
+                                                break
+                                        } else if a[y] == "sin" {
+                                                i = y
+                                                goto sineLabel
+                                                break
+                                        } else if a[y] == "cos" {
+                                                i = y
+                                                goto cosineLabel
+                                                break
+                                        } else if a[y] == "tan" {
+                                                i = y
+                                                goto tangentLabel
                                                 break
                                         }
                                 }
@@ -251,6 +290,18 @@ func solve (a []string) float64 {
                                         } else if a[y] == "sqrt" {
                                                 i = y
                                                 goto sqrt
+                                                break
+                                        } else if a[y] == "sin" {
+                                                i = y
+                                                goto sineLabel
+                                                break
+                                        } else if a[y] == "cos" {
+                                                i = y
+                                                goto cosineLabel
+                                                break
+                                        } else if a[y] == "tan" {
+                                                i = y
+                                                goto tangentLabel
                                                 break
                                         }
                                 }
@@ -298,6 +349,18 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto sqrt
                                                 break
+                                        } else if a[y] == "sin" {
+                                                i = y
+                                                goto sineLabel
+                                                break
+                                        } else if a[y] == "cos" {
+                                                i = y
+                                                goto cosineLabel
+                                                break
+                                        } else if a[y] == "tan" {
+                                                i = y
+                                                goto tangentLabel
+                                                break
                                         }
                                 }
                                 for y := i; y < len (a); y++ {
@@ -344,17 +407,29 @@ func solve (a []string) float64 {
                                                 goto div
                                                 break
                                         } else if a[y] == "sqrt" {
-                                               i = y
-                                               goto sqrt
-                                               break
+                                                i = y
+                                                goto sqrt
+                                                break
                                         } else if a[y] == "^" {
-                                               i = y
-                                               goto exp
-                                               break
+                                                i = y
+                                                goto exp
+                                                break
                                         } else if a[y] == "%" {
-                                               i = y
-                                               goto mod
-                                               break
+                                                i = y
+                                                goto mod
+                                                break
+                                        } else if a[y] == "sin" {
+                                                i = y
+                                                goto sineLabel
+                                                break
+                                        } else if a[y] == "cos" {
+                                                i = y
+                                                goto cosineLabel
+                                                break
+                                        } else if a[y] == "tan" {
+                                                i = y
+                                                goto tangentLabel
+                                                break
                                         }
                                 }
                                 for y := i; y < len (a); y++ {
@@ -401,17 +476,29 @@ func solve (a []string) float64 {
                                                 goto div
                                                 break
                                         } else if a[y] == "sqrt" {
-                                               i = y
-                                               goto sqrt
-                                               break
+                                                i = y
+                                                goto sqrt
+                                                break
                                         } else if a[y] == "^" {
-                                               i = y
-                                               goto exp
-                                               break
+                                                i = y
+                                                goto exp
+                                                break
                                         } else if a[y] == "%" {
-                                               i = y
-                                               goto mod
-                                               break
+                                                i = y
+                                                goto mod
+                                                break
+                                        } else if a[y] == "sin" {
+                                                i = y
+                                                goto sineLabel
+                                                break
+                                        } else if a[y] == "cos" {
+                                                i = y
+                                                goto cosineLabel
+                                                break
+                                        } else if a[y] == "tan" {
+                                                i = y
+                                                goto tangentLabel
+                                                break
                                         }
                                 }
                                 for y := i; y < len (a); y++ {
@@ -458,7 +545,19 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto sqrt
                                                 break
-                                        }
+                                        } else if a[y] == "sin" {
+                                                i = y
+                                                goto sineLabel
+                                                break
+                                        } else if a[y] == "cos" {
+                                                i = y
+                                                goto cosineLabel
+                                                break
+                                        } else if a[y] == "tan" {
+                                               i = y
+                                               goto tangentLabel
+                                               break
+                                       }
                                 }
                                 for y := i; y < len (a); y++ {
                                         if a[i + fdist] == "." {
