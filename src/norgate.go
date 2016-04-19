@@ -13,9 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
 package main
-
 import (
         "fmt"
         "os"
@@ -32,7 +30,7 @@ var hist int = 0
 func main () {
         clear ()
         start:
-        fmt.Print ("Enter an equation.\n")
+        fmt.Print ("Enter an equation or operation.\n")
         input := ""
         inread := bufio.NewReader (os.Stdin)
         in, inerr := inread.ReadString ('\n')
@@ -72,39 +70,35 @@ func solve (a []string) float64 {
         var answer float64 = 0
         var opcount float64 = 0
         for t := 0; t < len (a); t++ {
-                if a[t] == "*" {
+                switch a[t] {
+                case "*":
                         opcount++
-                }
-                if a[t] == "/" {
+                case "/":
                         opcount++
-                }
-                if a[t] == "+" {
+                case "+":
                         opcount++
-                }
-                if a[t] == "-" {
+                case "-":
                         opcount++
-                }
-                if a[t] == "%" {
+                case "%":
                         opcount++
-                }
-                if a[t] == "r" {
+                case "sqrt":
                         opcount++
-                }
-                if a[t] == "^" {
+                case "^":
                         opcount++
-                }
-                if a[t] == "!" {
+                case "sin":
+                        opcount++
+                case "!":
                         opcount++
                 }
         }
         opcount--
         for opcount >= 0 {
-                sqr:
+                sqrt:
                 for i := 0; i < len (a); i++ {
                         fdist := 1
-                        if a[i] == "r" {
+                        if a[i] == "sqrt" {
                                 for y := i; y < len (a); y++ {
-                                        if a[y] != "^" && a[y] != "r" && y == len (a) {
+                                        if a[y] != "^" && a[y] != "sqrt" && y == len (a) {
                                                 break
                                         }
                                 }
@@ -123,7 +117,7 @@ func solve (a []string) float64 {
                                 a[i] = fmt.Sprintf ("%v", one);
                                 answer = one
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint(a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
                                 i = 0
                         }
                 }
@@ -133,11 +127,11 @@ func solve (a []string) float64 {
 			bdist := 1
                         if a[i] == "^" {
                                 for y := i; y < len (a); y++ {
-                                        if a[y] == "r" {
+                                        if a[y] == "sqrt" {
                                                 i = y
-                                                goto sqr
+                                                goto sqrt
                                                 break
-                                        } else if a[y] != "^" && a[y] != "r" && y == len (a) {
+                                        } else if a[y] != "^" && a[y] != "sqrt" && y == len (a) {
                                                 break
                                         }
                                 }
@@ -161,7 +155,34 @@ func solve (a []string) float64 {
                                 a[i] = fmt.Sprintf ("%v", one);
                                 answer = one
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint(a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                i = 0
+                        }
+                }
+                for i := 0; i < len (a); i++ {
+                        fdist := 1
+                        if a[i] == "sin" {
+                                for y := i; y < len (a); y++ {
+                                        if a[y] != "^" && a[y] != "sin" && y == len (a) {
+                                                break
+                                        }
+                                }
+                                for y := i; y < len (a); y++ {
+                                        if a[i + fdist] == "." {
+                                                fdist++
+                                        }
+                                }
+                                one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
+                                if errorOne != nil {
+                                        ecode = 6
+                                        err (ecode)
+                                }
+                                one = sine (one)
+                                a[i + fdist] = "."
+                                a[i] = fmt.Sprintf ("%v", one);
+                                answer = one
+                                opcount--
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
                                 i = 0
                         }
                 }
@@ -174,7 +195,7 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto exp
                                                 break
-                                        } else if a[y] != "^" && a[y] != "r" && y == len (a) {
+                                        } else if a[y] != "^" && a[y] != "sqrt" && y == len (a) {
                                                 break
                                         }
                                 }
@@ -198,7 +219,7 @@ func solve (a []string) float64 {
                                 a[i] = fmt.Sprintf ("%v", one);
                                 answer = one
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint(a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
                                 i = 0
                         }
                 }
@@ -212,11 +233,11 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto exp
                                                 break
-                                        } else if a[y] == "r" {
+                                        } else if a[y] == "sqrt" {
                                                 i = y
-                                                goto sqr
+                                                goto sqrt
                                                 break
-                                        } else if a[y] != "^" && a[y] != "r" && y == len (a) {
+                                        } else if a[y] != "^" && a[y] != "sqrt" && y == len (a) {
                                                 break
                                         }
                                 }
@@ -246,7 +267,7 @@ func solve (a []string) float64 {
                                 a[i - bdist] = "."
                                 answer = two
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint(a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
                                 i = 0
                         }
                 }
@@ -260,11 +281,11 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto exp
                                                 break
-                                        } else if a[y] == "r" {
+                                        } else if a[y] == "sqrt" {
                                                 i = y
-                                                goto sqr
+                                                goto sqrt
                                                 break
-                                        } else if a[y] != "^" && a[y] != "r" && y == len (a) {
+                                        } else if a[y] != "^" && a[y] != "sqrt" && y == len (a) {
                                                 break
                                         }
                                 }
@@ -294,7 +315,7 @@ func solve (a []string) float64 {
                                 a[i - bdist] = "."
                                 answer = two
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint(a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
                                 i = 0
                         }
                 }
@@ -311,9 +332,9 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto div
                                                 break
-                                        } else if a[y] == "r" {
+                                        } else if a[y] == "sqrt" {
                                                i = y
-                                               goto sqr
+                                               goto sqrt
                                                break
                                         } else if a[y] == "^" {
                                                i = y
@@ -351,7 +372,7 @@ func solve (a []string) float64 {
                                 a[i - bdist] = "."
                                 answer = two
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint(a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
                                 i = 0
                         }
                 }
@@ -368,9 +389,9 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto div
                                                 break
-                                        } else if a[y] == "r" {
+                                        } else if a[y] == "sqrt" {
                                                i = y
-                                               goto sqr
+                                               goto sqrt
                                                break
                                         } else if a[y] == "^" {
                                                i = y
@@ -408,7 +429,7 @@ func solve (a []string) float64 {
                                 a[i - 1] = "."
                                 answer = two
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint(a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
                                 i = 0
                         }
                 }
@@ -422,9 +443,9 @@ func solve (a []string) float64 {
                                                 i = y
                                                 goto exp
                                                 break
-                                        } else if a[y] == "r" {
+                                        } else if a[y] == "sqrt" {
                                                 i = y
-                                                goto sqr
+                                                goto sqrt
                                                 break
                                         }
                                 }
@@ -454,7 +475,7 @@ func solve (a []string) float64 {
                                 a[i - bdist] = "."
                                 answer = two
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint(a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
                                 i = 0
                         }
                 }
