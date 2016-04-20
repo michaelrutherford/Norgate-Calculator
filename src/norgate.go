@@ -13,7 +13,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
 package main
+
 import (
         "fmt"
         "os"
@@ -22,11 +24,14 @@ import (
         "math"
         "bufio"
 )
+
 const MAX = 99999999
 const MIN = -99999999
+
 var ecode int = 0
 var history [50]float64;
 var hist int = 0
+
 func main () {
         clear ()
         start:
@@ -56,6 +61,7 @@ func main () {
         }
         goto start
 }
+
 func splice (a string) []string {
         var eqcoll []string
         if strings.Contains (a, "=") == true {
@@ -66,6 +72,7 @@ func splice (a string) []string {
         }
         return eqcoll
 }
+
 func solve (a []string) float64 {
         var answer float64 = 0
         var opcount float64 = 0
@@ -123,7 +130,7 @@ func solve (a []string) float64 {
                 }
                 for i := 0; i < len (a); i++ {
                         fdist := 1
-			bdist := 1
+                        bdist := 1
                         if a[i] == "^" {
                                 for y := i; y < len (a); y++ {
                                         if a[i + fdist] == "." {
@@ -239,7 +246,7 @@ func solve (a []string) float64 {
                 }
                 for i := 0; i < len (a); i++ {
                         fdist := 1
-			bdist := 1
+                        bdist := 1
                         if a[i] == "!" {
                                 for y := i; y < len (a); y++ {
                                         if a[i + fdist] == "." {
@@ -267,7 +274,7 @@ func solve (a []string) float64 {
                 }
                 for i := 0; i < len (a); i++ {
                         fdist := 1
-			bdist := 1
+                        bdist := 1
                         if a[i] == "*" {
                                 for y := i; y < len (a); y++ {
                                         if a[i + fdist] == "." {
@@ -301,7 +308,7 @@ func solve (a []string) float64 {
                 }
                 for i := 0; i < len (a); i++ {
                         fdist := 1
-			bdist := 1
+                        bdist := 1
                         if a[i] == "/" {
                                 for y := i; y < len (a); y++ {
                                         if a[i + fdist] == "." {
@@ -335,7 +342,7 @@ func solve (a []string) float64 {
                 }
                 for i := 0; i < len (a); i++ {
                         fdist := 1
-			bdist := 1
+                        bdist := 1
                         if a[i] == "+" {
                                 for y := i; y < len (a); y++ {
                                         if a[i + fdist] == "." {
@@ -369,7 +376,7 @@ func solve (a []string) float64 {
                 }
                 for i := 0; i < len (a); i++ {
                         fdist := 1
-			bdist := 1
+                        bdist := 1
                         if a[i] == "-" {
                                 for y := i; y < len (a); y++ {
                                         if a[i + fdist] == "." {
@@ -403,7 +410,7 @@ func solve (a []string) float64 {
                 }
                 for i := 0; i < len (a); i++ {
                         fdist := 1
-			bdist := 1
+                        bdist := 1
                         if a[i] == "%" {
                                 for y := i; y < len (a); y++ {
                                         if a[i + fdist] == "." {
@@ -438,6 +445,7 @@ func solve (a []string) float64 {
         }
         return answer
 }
+
 func err (e int) {
         switch (e) {
         case 1:
@@ -463,12 +471,14 @@ func err (e int) {
                 os.Exit (0)
         }
 }
+
 func clear () {
         for hval := 0; hval < len (history); hval++ {
                 history[hval] = 0.0
         }
         hist = 0
 }
+
 func add (a, b float64) float64 {
         if a + b > MAX || a + b < MIN {
                 ecode = 3
@@ -476,6 +486,7 @@ func add (a, b float64) float64 {
         }
         return a + b
 }
+
 func subtract (a, b float64) float64 {
         if a - b > MAX || a - b < MIN {
                 ecode = 3
@@ -483,6 +494,7 @@ func subtract (a, b float64) float64 {
         }
         return a - b
 }
+
 func multiply (a, b float64) float64 {
         if a * b > MAX || a * b < MIN {
                 ecode = 3
@@ -490,6 +502,7 @@ func multiply (a, b float64) float64 {
         }
         return a * b
 }
+
 func divide (a, b float64) float64 {
         if b == 0 {
                 ecode = 4
@@ -503,6 +516,7 @@ func divide (a, b float64) float64 {
         }
         return a / b
 }
+
 func modulus (a, b float64) float64 {
         if math.Mod (a, b) > MAX || math.Mod (a, b) < MIN {
                 ecode = 3
@@ -510,6 +524,7 @@ func modulus (a, b float64) float64 {
         }
         return math.Mod (a, b)
 }
+
 func factorial (a float64) float64 {
         if a < 0 {
                 ecode = 2
@@ -524,6 +539,7 @@ func factorial (a float64) float64 {
         }
         return a
 }
+
 func squareroot (a float64) float64 {
         if math.Sqrt (a) > MAX || math.Sqrt (a) < MIN {
                 ecode = 3
@@ -535,6 +551,7 @@ func squareroot (a float64) float64 {
         }
         return math.Sqrt (a)
 }
+
 func sine (a float64) float64 {
         if math.Sin (a) > MAX || math.Sin (a) < MIN {
                 ecode = 3
@@ -542,6 +559,7 @@ func sine (a float64) float64 {
         }
         return math.Sin (a)
 }
+
 func cosine (a float64) float64 {
         if math.Cos (a) > MAX || math.Cos (a) < MIN {
                 ecode = 3
@@ -549,6 +567,7 @@ func cosine (a float64) float64 {
         }
         return math.Cos (a)
 }
+
 func tangent (a float64) float64 {
         if math.Tan (a) > MAX || math.Tan (a) < MIN {
                 ecode = 3
@@ -556,6 +575,7 @@ func tangent (a float64) float64 {
         }
         return math.Tan (a)
 }
+
 func absolute (a float64) float64 {
         if math.Abs (a) > MAX || math.Abs (a) < MIN {
                 ecode = 3
@@ -563,6 +583,7 @@ func absolute (a float64) float64 {
         }
         return math.Abs (a)
 }
+
 func exponent (a, b float64) float64 {
         if math.Pow (a, b) > MAX || math.Pow (a, b) < MIN {
                 ecode = 3
