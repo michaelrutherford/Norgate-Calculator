@@ -57,7 +57,7 @@ func main () {
                 }
                 history[hist] = calc
                 hist++
-                fmt.Print (calc, "\n")
+                fmt.Println (calc)
         }
         goto start
 }
@@ -75,7 +75,7 @@ func splice (a string) []string {
 
 func solve (a []string) float64 {
         var answer float64 = 0
-        var opcount float64 = 0
+        var opcount int64 = 0
         for t := 0; t < len (a); t++ {
                 switch a[t] {
                 case "*":
