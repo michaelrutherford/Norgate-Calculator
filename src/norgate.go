@@ -78,342 +78,18 @@ func solve (a []string) float64 {
         var opcount int64 = 0
         opcount = countOperations (a)
         for opcount >= 0 {
-                for i := 0; i < len (a); i++ {
-                        fdist := 1
-                        if a[i] == "sqrt" {
-                                for y := i; y < len (a); y++ {
-                                        if a[i + fdist] == "." {
-                                                fdist++
-                                        }
-                                }
-                                one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
-                                if errorOne != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                one = squareroot (one)
-                                a[i + fdist] = "."
-                                a[i] = fmt.Sprintf ("%v", one);
-                                answer = one
-                                opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
-                                i = 0
-                        }
-                }
-                for i := 0; i < len (a); i++ {
-                        fdist := 1
-                        bdist := 1
-                        if a[i] == "^" {
-                                for y := i; y < len (a); y++ {
-                                        if a[i + fdist] == "." {
-                                                fdist++
-                                        }
-                                }
-                                for y := i; y >= 0; y-- {
-                                        if a[i - bdist] == "." {
-                                                bdist++
-                                        }
-                                }
-                                one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
-                                if errorOne != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                one = factorial (one)
-                                a[i - bdist] = "."
-                                a[i] = fmt.Sprintf ("%v", one);
-                                answer = one
-                                opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
-                                i = 0
-                        }
-                }
-                for i := 0; i < len (a); i++ {
-                        fdist := 1
-                        if a[i] == "abs" {
-                                for y := i; y < len (a); y++ {
-                                        if a[i + fdist] == "." {
-                                                fdist++
-                                        }
-                                }
-                                one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
-                                if errorOne != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                one = absolute (one)
-                                a[i + fdist] = "."
-                                a[i] = fmt.Sprintf ("%v", one);
-                                answer = one
-                                opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
-                                i = 0
-                        }
-                }
-                for i := 0; i < len (a); i++ {
-                        fdist := 1
-                        if a[i] == "sin" {
-                                for y := i; y < len (a); y++ {
-                                        if a[i + fdist] == "." {
-                                                fdist++
-                                        }
-                                }
-                                one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
-                                if errorOne != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                one = sine (one)
-                                a[i + fdist] = "."
-                                a[i] = fmt.Sprintf ("%v", one);
-                                answer = one
-                                opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
-                                i = 0
-                        }
-                }
-                for i := 0; i < len (a); i++ {
-                        fdist := 1
-                        if a[i] == "cos" {
-                                for y := i; y < len (a); y++ {
-                                        if a[i + fdist] == "." {
-                                                fdist++
-                                        }
-                                }
-                                one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
-                                if errorOne != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                one = cosine (one)
-                                a[i + fdist] = "."
-                                a[i] = fmt.Sprintf ("%v", one);
-                                answer = one
-                                opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
-                                i = 0
-                        }
-                }
-                for i := 0; i < len (a); i++ {
-                        fdist := 1
-                        if a[i] == "tan" {
-                                for y := i; y < len (a); y++ {
-                                        if a[i + fdist] == "." {
-                                                fdist++
-                                        }
-                                }
-                                one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
-                                if errorOne != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                one = tangent (one)
-                                a[i + fdist] = "."
-                                a[i] = fmt.Sprintf ("%v", one);
-                                answer = one
-                                opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
-                                i = 0
-                        }
-                }
-                for i := 0; i < len (a); i++ {
-                        fdist := 1
-                        bdist := 1
-                        if a[i] == "!" {
-                                for y := i; y < len (a); y++ {
-                                        if a[i + fdist] == "." {
-                                                fdist++
-                                        }
-                                }
-                                for y := i; y >= 0; y-- {
-                                        if a[i - bdist] == "." {
-                                                bdist++
-                                        }
-                                }
-                                one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
-                                if errorOne != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                one = factorial (one)
-                                a[i - bdist] = "."
-                                a[i] = fmt.Sprintf ("%v", one);
-                                answer = one
-                                opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
-                                i = 0
-                        }
-                }
-                for i := 0; i < len (a); i++ {
-                        fdist := 1
-                        bdist := 1
-                        if a[i] == "*" {
-                                for y := i; y < len (a); y++ {
-                                        if a[i + fdist] == "." {
-                                                fdist++
-                                        }
-                                }
-                                for y := i; y >= 0; y-- {
-                                        if a[i - bdist] == "." {
-                                                bdist++
-                                        }
-                                }
-                                one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
-                                if errorOne != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
-                                if errorTwo != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                two = multiply (one, two)
-                                a[i] = "."
-                                a[i + fdist] = fmt.Sprintf ("%v", two);
-                                a[i - bdist] = "."
-                                answer = two
-                                opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
-                                i = 0
-                        }
-                }
-                for i := 0; i < len (a); i++ {
-                        fdist := 1
-                        bdist := 1
-                        if a[i] == "/" {
-                                for y := i; y < len (a); y++ {
-                                        if a[i + fdist] == "." {
-                                                fdist++
-                                        }
-                                }
-                                for y := i; y >= 0; y-- {
-                                        if a[i - bdist] == "." {
-                                                bdist++
-                                        }
-                                }
-                                one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
-                                if errorOne != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
-                                if errorTwo != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                two = divide (one, two)
-                                a[i] = "."
-                                a[i + fdist] = fmt.Sprintf ("%v", two);
-                                a[i - bdist] = "."
-                                answer = two
-                                opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
-                                i = 0
-                        }
-                }
-                for i := 0; i < len (a); i++ {
-                        fdist := 1
-                        bdist := 1
-                        if a[i] == "+" {
-                                for y := i; y < len (a); y++ {
-                                        if a[i + fdist] == "." {
-                                                fdist++
-                                        }
-                                }
-                                for y := i; y >= 0; y-- {
-                                        if a[i - bdist] == "." {
-                                                bdist++
-                                        }
-                                }
-                                one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
-                                if errorOne != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
-                                if errorTwo != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                two = add (one, two)
-                                a[i] = "."
-                                a[i + fdist] = fmt.Sprintf ("%v", two);
-                                a[i - bdist] = "."
-                                answer = two
-                                opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
-                                i = 0
-                        }
-                }
-                for i := 0; i < len (a); i++ {
-                        fdist := 1
-                        bdist := 1
-                        if a[i] == "-" {
-                                for y := i; y < len (a); y++ {
-                                        if a[i + fdist] == "." {
-                                                fdist++
-                                        }
-                                }
-                                for y := i; y >= 0; y-- {
-                                        if a[i - bdist] == "." {
-                                                bdist++
-                                        }
-                                }
-                                one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
-                                if errorOne != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
-                                if errorTwo != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                two = subtract (one, two)
-                                a[i] = "."
-                                a[i + fdist] = fmt.Sprintf ("%v", two);
-                                a[i - 1] = "."
-                                answer = two
-                                opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
-                                i = 0
-                        }
-                }
-                for i := 0; i < len (a); i++ {
-                        fdist := 1
-                        bdist := 1
-                        if a[i] == "%" {
-                                for y := i; y < len (a); y++ {
-                                        if a[i + fdist] == "." {
-                                                fdist++
-                                        }
-                                }
-                                for y := i; y < len (a); y++ {
-                                        if a[i - bdist] == "." {
-                                                bdist++
-                                        }
-                                }
-                                one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
-                                if errorOne != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
-                                if errorTwo != nil {
-                                        ecode = 6
-                                        err (ecode)
-                                }
-                                two = modulus (one, two)
-                                a[i] = "."
-                                a[i + fdist] = fmt.Sprintf ("%v", two);
-                                a[i - bdist] = "."
-                                answer = two
-                                opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
-                                i = 0
-                        }
-                }
+                a, opcount, answer = squareroot (a, opcount, answer)
+                a, opcount, answer = exponent (a, opcount, answer)
+                a, opcount, answer = absolute (a, opcount, answer)
+                a, opcount, answer = sine (a, opcount, answer)
+                a, opcount, answer = cosine (a, opcount, answer)
+                a, opcount, answer = tangent (a, opcount, answer)
+                a, opcount, answer = factorial (a, opcount, answer)
+                a, opcount, answer = multiply (a, opcount, answer)
+                a, opcount, answer = divide (a, opcount, answer)
+                a, opcount, answer = addition (a, opcount, answer)
+                a, opcount, answer = subtraction (a, opcount, answer)
+                a, opcount, answer = modulus (a, opcount, answer)
         }
         return answer
 }
@@ -485,115 +161,469 @@ func countOperations (a []string) int64 {
         return count
 }
 
-func add (a, b float64) float64 {
-        if a + b > MAX || a + b < MIN {
-                ecode = 3
-                err (ecode)
-        }
-        return a + b
+func printEquation (a []string) {
+        fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
 }
 
-func subtract (a, b float64) float64 {
-        if a - b > MAX || a - b < MIN {
-                ecode = 3
-                err (ecode)
+func squareroot (a []string, b int64, c float64) ([]string, int64, float64) {
+        for i := 0; i < len (a); i++ {
+                fdist := 1
+                if a[i] == "sqrt" {
+                        for y := i; y < len (a); y++ {
+                                if a[i + fdist] == "." {
+                                        fdist++
+                                }
+                        }
+                        one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
+                        if errorOne != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        if one > MAX || one < MIN {
+                                ecode = 3
+                                err (ecode)
+                        }
+                        if one < 0 {
+                                ecode = 5
+                                err (ecode)
+                        }
+                        one = math.Sqrt (one)
+                        a[i + fdist] = "."
+                        a[i] = fmt.Sprintf ("%v", one);
+                        c = one
+                        b--
+                        i = 0
+                        printEquation (a)
+                }
         }
-        return a - b
+        return a, b, c
 }
 
-func multiply (a, b float64) float64 {
-        if a * b > MAX || a * b < MIN {
-                ecode = 3
-                err (ecode)
+func addition (a []string, b int64, c float64) ([]string, int64, float64) {
+        for i := 0; i < len (a); i++ {
+                fdist := 1
+                bdist := 1
+                if a[i] == "+" {
+                        for y := i; y < len (a); y++ {
+                                if a[i + fdist] == "." {
+                                        fdist++
+                                }
+                        }
+                        for y := i; y >= 0; y-- {
+                                if a[i - bdist] == "." {
+                                        bdist++
+                                }
+                        }
+                        one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
+                        if errorOne != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
+                        if errorTwo != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        two = one + two
+                        if two > MAX || two < MIN {
+                                ecode = 3
+                                err (ecode)
+                        }
+                        a[i] = "."
+                        a[i + fdist] = fmt.Sprintf ("%v", two);
+                        a[i - bdist] = "."
+                        c = two
+                        b--
+                        i = 0
+                        printEquation (a)
+                }
         }
-        return a * b
+        return a, b, c
 }
 
-func divide (a, b float64) float64 {
-        if b == 0 {
-                ecode = 4
-                err (ecode)
-        } else if a == 0 {
-                return 0
+func subtraction (a []string, b int64, c float64) ([]string, int64, float64) {
+        for i := 0; i < len (a); i++ {
+                fdist := 1
+                bdist := 1
+                if a[i] == "-" {
+                        for y := i; y < len (a); y++ {
+                                if a[i + fdist] == "." {
+                                        fdist++
+                                }
+                        }
+                        for y := i; y >= 0; y-- {
+                                if a[i - bdist] == "." {
+                                        bdist++
+                                }
+                        }
+                        one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
+                        if errorOne != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
+                        if errorTwo != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        two = one - two
+                        if two > MAX || two < MIN {
+                                ecode = 3
+                                err (ecode)
+                        }
+                        a[i] = "."
+                        a[i + fdist] = fmt.Sprintf ("%v", two);
+                        a[i - 1] = "."
+                        c = two
+                        b--
+                        i = 0
+                        printEquation (a)
+                }
         }
-        if a / b > MAX || a / b < MIN {
-                ecode = 3
-                err (ecode)
-        }
-        return a / b
+        return a, b, c
 }
 
-func modulus (a, b float64) float64 {
-        if math.Mod (a, b) > MAX || math.Mod (a, b) < MIN {
-                ecode = 3
-                err (ecode)
+func multiply (a []string, b int64, c float64) ([]string, int64, float64) {
+        for i := 0; i < len (a); i++ {
+                fdist := 1
+                bdist := 1
+                if a[i] == "*" {
+                        for y := i; y < len (a); y++ {
+                                if a[i + fdist] == "." {
+                                        fdist++
+                                }
+                        }
+                        for y := i; y >= 0; y-- {
+                                if a[i - bdist] == "." {
+                                        bdist++
+                                }
+                        }
+                        one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
+                        if errorOne != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
+                        if errorTwo != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        two = one * two
+                        if two > MAX || two < MIN {
+                                ecode = 3
+                                err (ecode)
+                        }
+                        a[i] = "."
+                        a[i + fdist] = fmt.Sprintf ("%v", two);
+                        a[i - bdist] = "."
+                        c = two
+                        b--
+                        i = 0
+                        printEquation (a)
+                }
         }
-        return math.Mod (a, b)
+        return a, b, c
 }
 
-func factorial (a float64) float64 {
-        if a < 0 {
-                ecode = 2
-                err (ecode)
+func divide (a []string, b int64, c float64) ([]string, int64, float64) {
+        for i := 0; i < len (a); i++ {
+                fdist := 1
+                bdist := 1
+                if a[i] == "/" {
+                        for y := i; y < len (a); y++ {
+                                if a[i + fdist] == "." {
+                                        fdist++
+                                }
+                        }
+                        for y := i; y >= 0; y-- {
+                                if a[i - bdist] == "." {
+                                        bdist++
+                                }
+                        }
+                        one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
+                        if errorOne != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
+                        if errorTwo != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        if two == 0 {
+                                ecode = 4
+                                err (ecode)
+                        }
+                        if one == 0 {
+                                two = 0
+                                a[i] = "."
+                                a[i + fdist] = fmt.Sprintf ("%v", two);
+                                a[i - bdist] = "."
+                                c = two
+                                b--
+                                i = 0
+                                printEquation (a)
+                                return a, b, c
+                        }
+                        two = one / two
+                        if two > MAX || two < MIN {
+                                ecode = 3
+                                err (ecode)
+                        }
+                        a[i] = "."
+                        a[i + fdist] = fmt.Sprintf ("%v", two);
+                        a[i - bdist] = "."
+                        c = two
+                        b--
+                        i = 0
+                        printEquation (a)
+                }
         }
-        for track := a - 1; track > 0; track-- {
-                a = a * track
-        }
-        if a > MAX || a < MIN {
-                ecode = 3
-                err (ecode)
-        }
-        return a
+        return a, b, c
 }
 
-func squareroot (a float64) float64 {
-        if math.Sqrt (a) > MAX || math.Sqrt (a) < MIN {
-                ecode = 3
-                err (ecode)
+func modulus (a []string, b int64, c float64) ([]string, int64, float64) {
+        for i := 0; i < len (a); i++ {
+                fdist := 1
+                bdist := 1
+                if a[i] == "%" {
+                        for y := i; y < len (a); y++ {
+                                if a[i + fdist] == "." {
+                                        fdist++
+                                }
+                        }
+                        for y := i; y < len (a); y++ {
+                                if a[i - bdist] == "." {
+                                        bdist++
+                                }
+                        }
+                        one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
+                        if errorOne != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
+                        if errorTwo != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        two = math.Mod (one, two)
+                        if two > MAX || two < MIN {
+                                ecode = 3
+                                err (ecode)
+                        }
+                        a[i] = "."
+                        a[i + fdist] = fmt.Sprintf ("%v", two);
+                        a[i - bdist] = "."
+                        c = two
+                        b--
+                        i = 0
+                        printEquation (a)
+                }
         }
-        if a < 0 {
-                ecode = 5
-                err (ecode)
-        }
-        return math.Sqrt (a)
+        return a, b, c
 }
 
-func sine (a float64) float64 {
-        if math.Sin (a) > MAX || math.Sin (a) < MIN {
-                ecode = 3
-                err (ecode)
+func factorial (a []string, b int64, c float64) ([]string, int64, float64) {
+        for i := 0; i < len (a); i++ {
+                fdist := 1
+                bdist := 1
+                if a[i] == "!" {
+                        for y := i; y < len (a); y++ {
+                                if a[i + fdist] == "." {
+                                        fdist++
+                                }
+                        }
+                        for y := i; y >= 0; y-- {
+                                if a[i - bdist] == "." {
+                                        bdist++
+                                }
+                        }
+                        one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
+                        if errorOne != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        if one < 0 {
+                                ecode = 2
+                                err (ecode)
+                        }
+                        for track := one - 1; track > 0; track-- {
+                                one = one * track
+                        }
+                        if one > MAX || one < MIN {
+                                ecode = 3
+                                err (ecode)
+                        }
+                        a[i - bdist] = "."
+                        a[i] = fmt.Sprintf ("%v", one);
+                        c = one
+                        b--
+                        i = 0
+                        printEquation (a)
+                }
         }
-        return math.Sin (a)
+        return a, b, c
 }
 
-func cosine (a float64) float64 {
-        if math.Cos (a) > MAX || math.Cos (a) < MIN {
-                ecode = 3
-                err (ecode)
+func sine (a []string, b int64, c float64) ([]string, int64, float64) {
+        for i := 0; i < len (a); i++ {
+                fdist := 1
+                if a[i] == "sin" {
+                        for y := i; y < len (a); y++ {
+                                if a[i + fdist] == "." {
+                                        fdist++
+                                }
+                        }
+                        one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
+                        if errorOne != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        one = math.Sin (one)
+                        if one > MAX || one < MIN {
+                                ecode = 3
+                                err (ecode)
+                        }
+                        a[i + fdist] = "."
+                        a[i] = fmt.Sprintf ("%v", one);
+                        c = one
+                        b--
+                        i = 0
+                        printEquation (a)
+                }
         }
-        return math.Cos (a)
+        return a, b, c
 }
 
-func tangent (a float64) float64 {
-        if math.Tan (a) > MAX || math.Tan (a) < MIN {
-                ecode = 3
-                err (ecode)
+func cosine (a []string, b int64, c float64) ([]string, int64, float64) {
+        for i := 0; i < len (a); i++ {
+                fdist := 1
+                if a[i] == "cos" {
+                        for y := i; y < len (a); y++ {
+                                if a[i + fdist] == "." {
+                                        fdist++
+                                }
+                        }
+                        one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
+                        if errorOne != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        one = math.Cos (one)
+                        if one > MAX || one < MIN {
+                                ecode = 3
+                                err (ecode)
+                        }
+                        a[i + fdist] = "."
+                        a[i] = fmt.Sprintf ("%v", one);
+                        c = one
+                        b--
+                        i = 0
+                        printEquation (a)
+                }
         }
-        return math.Tan (a)
+        return a, b, c
 }
 
-func absolute (a float64) float64 {
-        if math.Abs (a) > MAX || math.Abs (a) < MIN {
-                ecode = 3
-                err (ecode)
+func tangent (a []string, b int64, c float64) ([]string, int64, float64) {
+        for i := 0; i < len (a); i++ {
+                fdist := 1
+                if a[i] == "tan" {
+                        for y := i; y < len (a); y++ {
+                                if a[i + fdist] == "." {
+                                        fdist++
+                                }
+                        }
+                        one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
+                        if errorOne != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        one = math.Tan (one)
+                        if one > MAX || one < MIN {
+                                ecode = 3
+                                err (ecode)
+                        }
+                        a[i + fdist] = "."
+                        a[i] = fmt.Sprintf ("%v", one);
+                        c = one
+                        b--
+                        i = 0
+                        printEquation (a)
+                }
         }
-        return math.Abs (a)
+        return a, b, c
 }
 
-func exponent (a, b float64) float64 {
-        if math.Pow (a, b) > MAX || math.Pow (a, b) < MIN {
-                ecode = 3
-                err (ecode)
+func absolute (a []string, b int64, c float64) ([]string, int64, float64) {
+        for i := 0; i < len (a); i++ {
+                fdist := 1
+                if a[i] == "abs" {
+                        for y := i; y < len (a); y++ {
+                                if a[i + fdist] == "." {
+                                        fdist++
+                                }
+                        }
+                        one, errorOne := strconv.ParseFloat (a[i + fdist], 64)
+                        if errorOne != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        one = math.Abs (one)
+                        if one > MAX || one < MIN {
+                                ecode = 3
+                                err (ecode)
+                        }
+                        a[i + fdist] = "."
+                        a[i] = fmt.Sprintf ("%v", one);
+                        c = one
+                        b--
+                        i = 0
+                        printEquation (a)
+                }
         }
-        return math.Pow (a, b)
+        return a, b, c
+}
+
+func exponent (a []string, b int64, c float64) ([]string, int64, float64) {
+        for i := 0; i < len (a); i++ {
+                fdist := 1
+                bdist := 1
+                if a[i] == "^" {
+                        for y := i; y < len (a); y++ {
+                                if a[i + fdist] == "." {
+                                        fdist++
+                                }
+                        }
+                        for y := i; y >= 0; y-- {
+                                if a[i - bdist] == "." {
+                                        bdist++
+                                }
+                        }
+                        one, errorOne := strconv.ParseFloat (a[i - bdist], 64)
+                        if errorOne != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        two, errorTwo := strconv.ParseFloat (a[i + fdist], 64)
+                        if errorTwo != nil {
+                                ecode = 6
+                                err (ecode)
+                        }
+                        two = math.Pow (one, two)
+                        if two > MAX || two < MIN {
+                                ecode = 3
+                                err (ecode)
+                        }
+                        a[i - bdist] = "."
+                        a[i] = fmt.Sprintf ("%v", two);
+                        a[i + fdist] = "."
+                        c = two
+                        b--
+                        i = 0
+                        printEquation (a)
+                }
+        }
+        return a, b, c
 }
