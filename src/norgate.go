@@ -76,35 +76,7 @@ func splice (a string) []string {
 func solve (a []string) float64 {
         var answer float64 = 0
         var opcount int64 = 0
-        for t := 0; t < len (a); t++ {
-                switch a[t] {
-                case "*":
-                        opcount++
-                case "/":
-                        opcount++
-                case "+":
-                        opcount++
-                case "-":
-                        opcount++
-                case "%":
-                        opcount++
-                case "sqrt":
-                        opcount++
-                case "abs":
-                        opcount++
-                case "^":
-                        opcount++
-                case "sin":
-                        opcount++
-                case "cos":
-                        opcount++
-                case "tan":
-                        opcount++
-                case "!":
-                        opcount++
-                }
-        }
-        opcount--
+        opcount = countOperations (a)
         for opcount >= 0 {
                 for i := 0; i < len (a); i++ {
                         fdist := 1
@@ -477,6 +449,40 @@ func clear () {
                 history[hval] = 0.0
         }
         hist = 0
+}
+
+func countOperations (a []string) int64 {
+        var count int64 = 0
+        for t := 0; t < len (a); t++ {
+                switch a[t] {
+                case "*":
+                        count++
+                case "/":
+                        count++
+                case "+":
+                        count++
+                case "-":
+                        count++
+                case "%":
+                        count++
+                case "sqrt":
+                        count++
+                case "abs":
+                        count++
+                case "^":
+                        count++
+                case "sin":
+                        count++
+                case "cos":
+                        count++
+                case "tan":
+                        count++
+                case "!":
+                        count++
+                }
+        }
+        count--
+        return count
 }
 
 func add (a, b float64) float64 {
