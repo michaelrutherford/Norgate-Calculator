@@ -124,7 +124,7 @@ func solve (a []string) float64 {
                                 a[i] = fmt.Sprintf ("%v", one);
                                 answer = one
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
                                 i = 0
                         }
                 }
@@ -152,7 +152,7 @@ func solve (a []string) float64 {
                                 a[i] = fmt.Sprintf ("%v", one);
                                 answer = one
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
                                 i = 0
                         }
                 }
@@ -174,7 +174,7 @@ func solve (a []string) float64 {
                                 a[i] = fmt.Sprintf ("%v", one);
                                 answer = one
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
                                 i = 0
                         }
                 }
@@ -196,7 +196,7 @@ func solve (a []string) float64 {
                                 a[i] = fmt.Sprintf ("%v", one);
                                 answer = one
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
                                 i = 0
                         }
                 }
@@ -218,7 +218,7 @@ func solve (a []string) float64 {
                                 a[i] = fmt.Sprintf ("%v", one);
                                 answer = one
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
                                 i = 0
                         }
                 }
@@ -240,7 +240,7 @@ func solve (a []string) float64 {
                                 a[i] = fmt.Sprintf ("%v", one);
                                 answer = one
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
                                 i = 0
                         }
                 }
@@ -268,7 +268,7 @@ func solve (a []string) float64 {
                                 a[i] = fmt.Sprintf ("%v", one);
                                 answer = one
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
                                 i = 0
                         }
                 }
@@ -302,7 +302,7 @@ func solve (a []string) float64 {
                                 a[i - bdist] = "."
                                 answer = two
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
                                 i = 0
                         }
                 }
@@ -336,7 +336,7 @@ func solve (a []string) float64 {
                                 a[i - bdist] = "."
                                 answer = two
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
                                 i = 0
                         }
                 }
@@ -370,7 +370,7 @@ func solve (a []string) float64 {
                                 a[i - bdist] = "."
                                 answer = two
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
                                 i = 0
                         }
                 }
@@ -404,7 +404,7 @@ func solve (a []string) float64 {
                                 a[i - 1] = "."
                                 answer = two
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
                                 i = 0
                         }
                 }
@@ -438,7 +438,7 @@ func solve (a []string) float64 {
                                 a[i - bdist] = "."
                                 answer = two
                                 opcount--
-                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]"))
+                                fmt.Println (strings.Trim (fmt.Sprint (a), "[]\n"))
                                 i = 0
                         }
                 }
