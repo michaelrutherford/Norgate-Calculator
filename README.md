@@ -45,4 +45,4 @@ _All input must be separated by spaces. See the example below._
 [Go](https://golang.org/)
 
 # LICENSE
-Released under the Apache License v2.0 by Michael Rutherford (2015-2016) -- see LICENSE
+Released under version 3 of the GPL by Michael Rutherford (2015-2017) -- see LICENSE
